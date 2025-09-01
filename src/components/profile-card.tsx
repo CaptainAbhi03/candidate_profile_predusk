@@ -17,7 +17,7 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile }) => {
     <Card className="shadow-lg">
       <CardHeader className="text-center">
         <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
-          <AvatarImage src={`https://i.pravatar.cc/150?u=${email}`} alt={name} />
+          <AvatarImage src="" alt={name} />
           <AvatarFallback className="text-3xl bg-primary/30 text-primary-foreground">
             {initials}
           </AvatarFallback>
