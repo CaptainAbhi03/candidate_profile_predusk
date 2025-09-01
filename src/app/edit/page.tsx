@@ -14,6 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ProfileSchema } from '@/types/zod-schema';
 import type { Profile } from '@/types';
 import { Trash2, PlusCircle, Loader2 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function EditProfilePage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
