@@ -58,7 +58,7 @@ export default async function Home() {
           </h1>
           <p className="mt-2 text-lg text-muted-foreground">
             A dynamic showcase of skills and projects.
-          p>
+          </p>
         </div>
       </header>
       <main className="container mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
