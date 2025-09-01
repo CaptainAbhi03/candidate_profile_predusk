@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Mail, Github, Linkedin, Globe } from 'lucide-react';
+import { Mail, Github, Linkedin, Phone } from 'lucide-react';
 import type { Profile } from '@/types';
 
 interface ProfileCardProps {
@@ -44,10 +44,10 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile }) => {
                     <span className="sr-only">LinkedIn</span>
                 </Button>
             </a>
-            <a href={links.portfolio} target="_blank" rel="noopener noreferrer">
+            <a href="tel:7023500576">
                 <Button variant="ghost" size="icon">
-                    <Globe className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors" />
-                    <span className="sr-only">Portfolio</span>
+                    <Phone className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors" />
+                    <span className="sr-only">Phone</span>
                 </Button>
             </a>
         </div>
