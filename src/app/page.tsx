@@ -6,7 +6,7 @@ import ProjectSearch from "@/components/project-search";
 import { connectToDatabase } from "@/lib/mongodb";
 import type { Profile } from "@/types";
 
-async function getProfileData(): Promise<Profile | null> {
+async function getProfileData(): Promise<{data: Profile | null; error: string | null}> {
   try {
     const { db } = await connectToDatabase();
     // Assuming you have a 'profile' collection with a single document.
@@ -14,31 +14,35 @@ async function getProfileData(): Promise<Profile | null> {
     const profile = await db.collection('profile').findOne({});
 
     if (!profile) {
-      return null;
+      return { data: null, error: "Profile data not found in the database." };
     }
 
     // The _id field from MongoDB is not serializable for Next.js server components by default.
     // We convert it to a string and then remove it.
     const { _id, ...profileData } = profile;
-    return JSON.parse(JSON.stringify(profileData)) as Profile;
+    return { data: JSON.parse(JSON.stringify(profileData)) as Profile, error: null };
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to fetch profile data:", error);
-    return null;
+    // Special handling for setup-related errors
+    if (error.name === 'MissingEnvError') {
+      return { data: null, error: `${error.message}. Please create or update the .env file in the root of your project with your MongoDB connection details.` };
+    }
+    return { data: null, error: "Could not load profile data. Please check the database connection and ensure data exists." };
   }
 }
 
 
 export default async function Home() {
-  const profileData = await getProfileData();
+  const { data: profileData, error } = await getProfileData();
 
   if (!profileData) {
     return (
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-destructive mb-4">Error</h1>
-          <p className="text-lg text-muted-foreground">Could not load profile data. Please check the database connection and ensure data exists.</p>
-          <p className="text-sm text-muted-foreground mt-2">You may need to seed your database. Check the README for instructions.</p>
+        <div className="text-center p-8 max-w-2xl mx-auto bg-card rounded-lg shadow-lg border border-destructive/50">
+          <h1 className="text-4xl font-bold text-destructive mb-4">Application Error</h1>
+          <p className="text-lg text-muted-foreground">{error}</p>
+          <p className="text-sm text-muted-foreground mt-4">If you've already set up your database, ensure it is seeded with a profile document. Check the README.md for instructions.</p>
         </div>
       </div>
     )
