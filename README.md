@@ -76,7 +76,10 @@ The application uses a single `profile` collection in MongoDB with a document th
     ```
 
 4.  **Seed your database:**
-    Connect to your MongoDB instance and create a database with the name you specified in `MONGODB_DB_NAME`. Inside that database, create a collection named `profile` and insert one document containing your profile data, following the schema above. You can adapt the data from `src/lib/data.ts`.
+    Run the following command in your terminal to populate the database with the profile data.
+    ```bash
+    npm run db:seed
+    ```
 
 5.  **Run the development server:**
     ```bash
