@@ -36,4 +36,5 @@ export interface Profile {
 
 export interface RankedProject extends Project {
   relevanceScore: number;
+  reasoning: string;
 }

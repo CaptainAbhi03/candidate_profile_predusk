@@ -28,6 +28,7 @@ const IntelligentSkillSearchOutputSchema = z.array(
     title: z.string().describe('The title of the project.'),
     description: z.string().describe('A detailed description of the project.'),
     relevanceScore: z.number().describe('A numerical score indicating the relevance of the project to the search skill.'),
+    reasoning: z.string().describe('A brief explanation of why the project is relevant to the skill.'),
     links: z.array(z.string()).optional().describe('URLs related to the project, if any'),
   })
 ).describe('An array of project objects ranked by relevance to the search skill.');
@@ -41,15 +42,14 @@ const intelligentSkillSearchPrompt = ai.definePrompt({
   name: 'intelligentSkillSearchPrompt',
   input: {schema: IntelligentSkillSearchInputSchema},
   output: {schema: IntelligentSkillSearchOutputSchema},
-  prompt: `You are an AI expert in matching skills to projects. Given a skill and a list of projects, rank the projects by relevance to the skill. Return the projects with a relevance score between 0 and 1, where 1 is the most relevant.
+  prompt: `You are an AI expert in matching skills to projects. Given a skill and a list of projects, rank the projects by relevance to the skill. For each project, provide a relevance score between 0 and 1, where 1 is the most relevant, and a brief reasoning for your score.
 
 Skill: {{{skill}}}
 
 Projects:
 {{#each projects}}
-Title: {{{this.title}}}
-Description: {{{this.description}}}
-Links: {{#each this.links}}{{{this}}}{{/each}}
+- Title: {{{this.title}}}
+  Description: {{{this.description}}}
 {{/each}}`,
 });
 

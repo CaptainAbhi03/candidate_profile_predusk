@@ -9,9 +9,9 @@ export const profileData: Profile = {
   title: "Software Engineer",
   email: "abhi003mathur@gmail.com",
   links: {
-    github: "https://github.com/AbhineetMathur",
+    github: "https://github.com/CaptainAbhi03",
     linkedin: "https://linkedin.com/in/03Abhi",
-    portfolio: "https://github.com/AbhineetMathur"
+    portfolio: "https://github.com/CaptainAbhi03"
   },
   skills: [
     "Python", "Java", "C/C++", "SQL", "JavaScript", "TypeScript", "Node.js",

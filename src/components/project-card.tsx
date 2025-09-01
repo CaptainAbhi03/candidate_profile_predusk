@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Lightbulb } from 'lucide-react';
 import type { RankedProject } from '@/types';
 
 interface ProjectCardProps {
@@ -10,7 +10,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
-  const { title, description, links, relevanceScore } = project;
+  const { title, description, links, relevanceScore, reasoning } = project;
 
   return (
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
@@ -26,7 +26,17 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
         )}
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow"></CardContent>
+      <CardContent className="flex-grow">
+        {reasoning && (
+          <div className="mt-4 p-3 bg-accent/50 rounded-lg text-sm text-accent-foreground">
+            <div className="flex items-center font-semibold mb-1">
+              <Lightbulb className="mr-2 h-4 w-4 text-primary" />
+              AI Reasoning
+            </div>
+            <p>{reasoning}</p>
+          </div>
+        )}
+      </CardContent>
       <CardFooter>
         <div className="flex flex-wrap gap-2">
           {links?.map((link, index) => (
