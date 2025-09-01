@@ -5,73 +5,61 @@ import type { Profile } from '@/types';
  * You can use this structure to seed your database.
  */
 export const profileData: Profile = {
-  name: "Alex Doe",
-  title: "Full Stack AI Engineer",
-  email: "alex.doe@email.com",
+  name: "Abhineet Mathur",
+  title: "Software Engineer",
+  email: "abhi003mathur@gmail.com",
   links: {
-    github: "https://github.com/alexdoe",
-    linkedin: "https://linkedin.com/in/alexdoe",
-    portfolio: "https://alexdoe.com"
+    github: "https://github.com/AbhineetMathur",
+    linkedin: "https://linkedin.com/in/03Abhi",
+    portfolio: "https://github.com/AbhineetMathur"
   },
   skills: [
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Python",
-    "Genkit",
-    "Firebase",
-    "MongoDB",
-    "SQL",
-    "Docker",
-    "UI/UX Design"
+    "Python", "Java", "C/C++", "SQL", "JavaScript", "TypeScript", "Node.js",
+    "LangChain", "Scikit-learn", "Pandas", "NumPy", "FAISS", "Optuna", "Streamlit", "RAG Pipelines", "Power BI",
+    "Apache Spark", "Hadoop", "Cassandra", "AWS (EC2, S3, Lambda)", "PostgreSQL", "Data Pipelines", "ETL",
+    "React", "Angular", "FastAPI", "Django", "HTML5", "CSS3", "Bootstrap", "Tailwind CSS", "REST APIs",
+    "Docker", "Kubernetes", "Terraform", "GitHub Actions", "Git", "Microsoft 365", "Power Platform"
   ],
   education: [
     {
-      institution: "University of Technology",
-      degree: "M.S. in Computer Science",
-      period: "2018 - 2020"
+      institution: "Manipal University Jaipur",
+      degree: "Bachelor of Technology in Information Technology",
+      period: "Sep 2022 - Jul 2026 (Expected)"
     },
     {
-      institution: "State University",
-      degree: "B.S. in Software Engineering",
-      period: "2014 - 2018"
+      institution: "Our Lady of Pillar Convent School",
+      degree: "CBSE PCM",
+      period: "Apr 2020 - May 2022"
     }
   ],
   workExperience: [
     {
-      company: "Innovate Inc.",
-      role: "Senior Software Engineer",
-      period: "2022 - Present",
-      description: "Leading development of AI-powered features for a flagship product. Architecting scalable cloud solutions on Firebase and GCP. Mentoring junior developers."
-    },
-    {
-      company: "Tech Solutions LLC",
-      role: "Software Engineer",
-      period: "2020 - 2022",
-      description: "Developed and maintained full-stack web applications using the MERN stack. Collaborated with cross-functional teams to deliver high-quality software."
+      company: "Tata Technologies",
+      role: "Software Engineering Intern",
+      period: "Jun 2025 - Present",
+      description: "Orchestrated scalable ETL data pipelines using LangChain and Python, integrating 1000+ enterprise documents with predictive analytics for data modernization. Architected FastAPI backends with real-time analytics, achieving 99.5% uptime and sub-2-second response times. Implemented RAG pipelines with FAISS indexing for data governance, improving accuracy by 40%. Deployed cloud workflows on AWS EC2 with Docker/CI/CD, reducing operational costs by 30%."
     }
   ],
   projects: [
     {
-      title: "AI-Powered Project Search",
-      description: "A Next.js application that uses a Genkit AI flow to rank and search projects based on skill relevance. Demonstrates integration of modern AI tooling in a web app.",
-      links: ["https://github.com/alexdoe/ai-project-search"]
+      title: "AI-Driven Business Proposal Generation Tool",
+      description: "Optimized data processing pipelines using Hadoop/Spark for high-throughput ETL workflows, cutting processing time by 75%. Established data governance framework with FAISS-based search, ensuring 99.5% data integrity across data lakes. Developed 8 microservices with FastAPI enabling real-time analytics for investment data processing.",
+      links: []
     },
     {
-      title: "E-commerce Platform",
-      description: "A full-featured e-commerce website built with React, Node.js, and MongoDB. Includes user authentication, product catalog, shopping cart, and payment integration with Stripe.",
-      links: ["https://github.com/alexdoe/ecommerce-platform"]
+      title: "Cloud-Native Task Management System",
+      description: "Engineered scalable web application supporting 100+ users with PostgreSQL handling 10GB+ data. Created 25+ RESTful APIs with sub-200ms response times, integrating real-time analytics dashboard. Orchestrated deployment using Docker/Kubernetes on AWS EC2, reducing operational delays by 35%.",
+      links: []
     },
     {
-      title: "Data Visualization Dashboard",
-      description: "A dashboard for visualizing complex datasets using D3.js and React. Features interactive charts and graphs to provide insights from raw data.",
-      links: ["https://github.com/alexdoe/data-viz-dashboard"]
+      title: "ML-Powered Credit Risk Analytics Engine",
+      description: "Developed ML system processing 50,000+ loan applications for real-time risk assessment. Achieved 93% accuracy and 98% AUC-ROC, outperforming traditional models by 15%. Created Streamlit interface serving 200+ daily users, reducing manual assessment time by 80%.",
+      links: []
     },
     {
-      title: "IoT Smart Home Controller",
-      description: "A Python-based application to control smart home devices via a unified API. Deployed on a Raspberry Pi using Docker for containerization.",
-      links: ["https://github.com/alexdoe/iot-controller"]
+      title: "ML-Based Credit Risk Assessment Framework",
+      description: "Authored research analyzing 75,000+ data points with ensemble models, achieving 94.2% prediction accuracy and 3.5x scalability improvement. To be published in IEEE ICCCNT 2025.",
+      links: []
     }
   ]
 };
