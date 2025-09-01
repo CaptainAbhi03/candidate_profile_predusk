@@ -1,7 +1,15 @@
 import { NextResponse } from 'next/server';
 import { intelligentSkillSearch } from '@/ai/flows/intelligent-skill-search';
-import { profileData } from '@/lib/data';
-import type { RankedProject } from '@/types';
+import { connectToDatabase } from '@/lib/mongodb';
+import type { Project, RankedProject } from '@/types';
+
+async function getProjects(): Promise<Project[]> {
+    const { db } = await connectToDatabase();
+    // In a multi-user app, you'd filter by a user/profile ID.
+    // For this app, we assume a single profile document.
+    const profile = await db.collection('profile').findOne({}, { projection: { projects: 1, _id: 0 } });
+    return profile?.projects || [];
+}
 
 export async function POST(request: Request) {
   try {
@@ -11,9 +19,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Skill query is required' }, { status: 400 });
     }
 
-    const projects = profileData.projects;
+    const projects = await getProjects();
 
-    // The AI flow can be slow, so for a production app you might add caching or other optimizations.
+    if (projects.length === 0) {
+      return NextResponse.json([]);
+    }
+
     const rankedProjects: RankedProject[] = await intelligentSkillSearch({
       skill,
       projects,

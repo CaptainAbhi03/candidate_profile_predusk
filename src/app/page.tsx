@@ -1,11 +1,49 @@
-import { profileData } from "@/lib/data";
 import ProfileCard from "@/components/profile-card";
 import SkillsCard from "@/components/skills-card";
 import EducationCard from "@/components/education-card";
 import WorkExperienceCard from "@/components/work-experience-card";
 import ProjectSearch from "@/components/project-search";
+import { connectToDatabase } from "@/lib/mongodb";
+import type { Profile } from "@/types";
 
-export default function Home() {
+async function getProfileData(): Promise<Profile | null> {
+  try {
+    const { db } = await connectToDatabase();
+    // Assuming you have a 'profile' collection with a single document.
+    // You might want to use a specific ID in a real application.
+    const profile = await db.collection('profile').findOne({});
+
+    if (!profile) {
+      return null;
+    }
+
+    // The _id field from MongoDB is not serializable for Next.js server components by default.
+    // We convert it to a string and then remove it.
+    const { _id, ...profileData } = profile;
+    return JSON.parse(JSON.stringify(profileData)) as Profile;
+
+  } catch (error) {
+    console.error("Failed to fetch profile data:", error);
+    return null;
+  }
+}
+
+
+export default async function Home() {
+  const profileData = await getProfileData();
+
+  if (!profileData) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-destructive mb-4">Error</h1>
+          <p className="text-lg text-muted-foreground">Could not load profile data. Please check the database connection and ensure data exists.</p>
+          <p className="text-sm text-muted-foreground mt-2">You may need to seed your database. Check the README for instructions.</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="py-10">

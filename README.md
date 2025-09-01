@@ -6,19 +6,20 @@ Welcome to Profile Pod, a personal portfolio playground to showcase your profess
 
 Profile Pod uses a modern, server-centric approach with the Next.js App Router.
 
-- **Frontend**: Built with React and Next.js 14. Components are styled using Tailwind CSS and shadcn/ui for a clean, professional look. The UI is server-rendered by default, with client-side interactivity for features like searching.
-- **Backend/API**: Implemented as API Route Handlers within the Next.js application (`src/app/api`). This provides a RESTful interface for accessing profile data.
-- **Database**: To keep the project simple and easily deployable, this version uses a mock database. All profile data is stored in a static file at `src/lib/data.ts`. This can be replaced with a real database (e.g., MongoDB, PostgreSQL) by updating the API routes.
+- **Frontend**: Built with React and Next.js 14. Components are styled using Tailwind CSS and shadcn/ui for a clean, professional look.
+- **Backend/API**: Implemented as API Route Handlers within the Next.js application (`src/app/api`).
+- **Database**: Uses MongoDB for data persistence. A connection helper is located at `src/lib/mongodb.ts`.
 - **AI Integration**: Project searching is enhanced with Google's Gemini model via Genkit. The `intelligentSkillSearch` flow analyzes project descriptions against a search query to rank them by relevance.
 
 ## Data Schema
 
-Since a NoSQL-style mock database is used, here is the schema for the main data structure.
+The application uses a single `profile` collection in MongoDB with a document that follows this schema.
 
 ### Profile
 
 ```json
 {
+  "_id": "ObjectId",
   "name": "string",
   "title": "string",
   "email": "string",
@@ -67,13 +68,15 @@ Since a NoSQL-style mock database is used, here is the schema for the main data 
     ```
 
 3.  **Set up environment variables:**
-    Create a `.env.local` file in the root of the project and add your Google AI API key. You can get one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+    Create a `.env` file in the root of the project and add your Google AI API key and your MongoDB connection details. You can get a Google AI key from [Google AI Studio](https://aistudio.google.com/app/apikey).
     ```
     GOOGLE_API_KEY=your_google_api_key
+    MONGODB_URI=your_mongodb_connection_string
+    MONGODB_DB_NAME=your_database_name
     ```
 
-4.  **Seed your data:**
-    Modify the `src/lib/data.ts` file to include your personal profile information.
+4.  **Seed your database:**
+    Connect to your MongoDB instance and create a database with the name you specified in `MONGODB_DB_NAME`. Inside that database, create a collection named `profile` and insert one document containing your profile data, following the schema above. You can adapt the data from `src/lib/data.ts`.
 
 5.  **Run the development server:**
     ```bash
@@ -83,34 +86,11 @@ Since a NoSQL-style mock database is used, here is the schema for the main data 
 
 ## API Endpoints
 
-The API is hosted alongside the frontend.
-
-- **`GET /api/health`**: Liveness probe.
-  - **Success Response (200 OK):** `{"status":"ok"}`
-  - **Sample cURL:**
-    ```bash
-    curl http://localhost:9002/api/health
-    ```
-
 - **`GET /api/profile`**: Retrieves the entire profile document.
-  - **Success Response (200 OK):** The full profile object as defined in the schema.
-  - **Sample cURL:**
-    ```bash
-    curl http://localhost:9002/api/profile
-    ```
-
 - **`POST /api/search`**: Searches projects based on a skill, ranked by AI.
-  - **Request Body:** `{"skill": "your skill query"}`
-  - **Success Response (200 OK):** An array of project objects, each with an added `relevanceScore`.
-  - **Sample cURL:**
-    ```bash
-    curl -X POST http://localhost:9002/api/search \
-    -H "Content-Type: application/json" \
-    -d '{"skill": "React"}'
-    ```
 
 ## Known Limitations
 
-- **No Persistent Storage**: The application uses a mock data file instead of a real database. Any changes made via API endpoints (if implemented) would not persist across server restarts.
+- **Single Profile**: The application is designed to showcase a single profile document from the database.
 - **No Authentication**: The API is public and has no authentication or authorization layer.
-- **Update/Create Functionality**: The UI and API for creating or updating a profile are not implemented to keep the scope minimal. Data must be updated directly in the `src/lib/data.ts` file.
+- **Update/Create Functionality**: The UI and API for creating or updating a profile are not implemented. Data must be updated directly in the database.

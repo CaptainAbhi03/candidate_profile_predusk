@@ -1,5 +1,9 @@
 import type { Profile } from '@/types';
 
+/**
+ * @deprecated This file is for reference only. Data is now fetched from MongoDB.
+ * You can use this structure to seed your database.
+ */
 export const profileData: Profile = {
   name: "Alex Doe",
   title: "Full Stack AI Engineer",
