@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import { intelligentSkillSearch } from '@/ai/flows/intelligent-skill-search';
 import { connectToDatabase } from '@/lib/mongodb';
-import type { Project, RankedProject } from '@/types';
+import type { Project } from '@/types';
 
 async function getProjects(): Promise<Project[]> {
     const { db } = await connectToDatabase();
@@ -16,7 +15,7 @@ export async function POST(request: Request) {
     const { skill } = await request.json();
 
     if (!skill || typeof skill !== 'string') {
-      return NextResponse.json({ error: 'Skill query is required' }, { status: 400 });
+      return NextResponse.json({ error: 'Search query is required' }, { status: 400 });
     }
 
     const projects = await getProjects();
@@ -25,17 +24,15 @@ export async function POST(request: Request) {
       return NextResponse.json([]);
     }
 
-    const rankedProjects: RankedProject[] = await intelligentSkillSearch({
-      skill,
-      projects,
-    });
-    
-    // Sort results by relevance score in descending order
-    const sortedProjects = rankedProjects.sort((a, b) => b.relevanceScore - a.relevanceScore);
+    const searchLower = skill.toLowerCase();
+    const filteredProjects = projects.filter(project => 
+        project.title.toLowerCase().includes(searchLower) ||
+        project.description.toLowerCase().includes(searchLower)
+    );
 
-    return NextResponse.json(sortedProjects);
+    return NextResponse.json(filteredProjects);
   } catch (error) {
-    console.error('Error in intelligent skill search:', error);
+    console.error('Error in search:', error);
     return NextResponse.json({ error: 'An error occurred during the search.' }, { status: 500 });
   }
 }

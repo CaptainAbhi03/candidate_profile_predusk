@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from "@/hooks/use-toast"
 import ProjectCard from './project-card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Search, Sparkles, Files } from 'lucide-react';
+import { Search, Files } from 'lucide-react';
 import type { Project, RankedProject } from '@/types';
 
 interface ProjectSearchProps {
@@ -17,16 +17,12 @@ interface ProjectSearchProps {
 export default function ProjectSearch({ projects: initialProjects }: ProjectSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [isPending, startTransition] = useTransition();
-  const [results, setResults] = useState<(RankedProject | Project)[]>(initialProjects);
+  const [results, setResults] = useState<Project[]>(initialProjects);
   const { toast } = useToast();
 
   const handleSearch = () => {
     if (!searchQuery.trim()) {
-      toast({
-        title: "Search query empty",
-        description: "Please enter a skill to search for.",
-        variant: "destructive",
-      });
+      setResults(initialProjects);
       return;
     }
 
@@ -42,12 +38,12 @@ export default function ProjectSearch({ projects: initialProjects }: ProjectSear
           throw new Error('Search request failed');
         }
 
-        const data: RankedProject[] = await response.json();
+        const data: Project[] = await response.json();
         setResults(data);
         if (data.length === 0) {
             toast({
-                title: "No relevant projects found",
-                description: "Try a different skill or broader term.",
+                title: "No projects found",
+                description: "No projects matched your search term.",
             });
         }
       } catch (error) {
@@ -83,7 +79,7 @@ export default function ProjectSearch({ projects: initialProjects }: ProjectSear
             className="bg-card"
           />
           <Button onClick={handleSearch} disabled={isPending}>
-            <Sparkles className="mr-2 h-4 w-4" /> AI Search
+            <Search className="mr-2 h-4 w-4" /> Search
           </Button>
           <Button onClick={handleClear} variant="outline" disabled={isPending}>
             Clear

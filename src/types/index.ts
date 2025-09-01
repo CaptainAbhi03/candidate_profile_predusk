@@ -34,6 +34,8 @@ export interface Profile {
   projects: Project[];
 }
 
+// This remains for now to avoid breaking the ProjectCard if it receives old data.
+// A simple search will return `Project[]`, not `RankedProject[]`.
 export interface RankedProject extends Project {
   relevanceScore: number;
   reasoning: string;
