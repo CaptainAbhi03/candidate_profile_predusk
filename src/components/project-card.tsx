@@ -1,0 +1,45 @@
+import type { FC } from 'react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowUpRight } from 'lucide-react';
+import type { RankedProject } from '@/types';
+
+interface ProjectCardProps {
+  project: RankedProject;
+}
+
+const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
+  const { title, description, links, relevanceScore } = project;
+
+  return (
+    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+      <CardHeader>
+        <CardTitle className="font-headline">{title}</CardTitle>
+        {relevanceScore !== undefined && (
+          <Badge 
+            variant={relevanceScore > 0.7 ? "default" : "secondary"} 
+            className="absolute top-4 right-4 bg-accent text-accent-foreground"
+          >
+            Relevance: {(relevanceScore * 100).toFixed(0)}%
+          </Badge>
+        )}
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-grow"></CardContent>
+      <CardFooter>
+        <div className="flex flex-wrap gap-2">
+          {links?.map((link, index) => (
+            <a href={link} key={index} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="sm">
+                View Project <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
+          ))}
+        </div>
+      </CardFooter>
+    </Card>
+  );
+};
+
+export default ProjectCard;
