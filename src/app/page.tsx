@@ -76,11 +76,6 @@ export default async function Home() {
         </div>
       </main>
       <footer className="bg-card text-center p-6 text-muted-foreground text-sm border-t">
-        <div className="flex justify-center items-center gap-2">
-            <Code2 className="w-5 h-5 text-primary"/>
-            <p>Built with Next.js, shadcn/ui, and Genkit AI.</p>
-        </div>
-        <p className="mt-1">Deployed on Firebase.</p>
         <div className="mt-4">
             <Link href="/edit" className="text-xs text-muted-foreground hover:text-primary flex items-center justify-center gap-1">
                 <Edit className="w-3 h-3" /> Edit Profile
