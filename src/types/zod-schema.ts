@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 export const LinksSchema = z.object({
-    github: z.string().url().or(z.literal('')),
-    linkedin: z.string().url().or(z.literal('')),
-    portfolio: z.string().url().or(z.literal('')),
+    github: z.string().url().or(z.literal('')).optional(),
+    linkedin: z.string().url().or(z.literal('')).optional(),
+    portfolio: z.string().url().or(z.literal('')).optional(),
 });
 
 export const EducationSchema = z.object({
@@ -24,18 +24,18 @@ export const ProjectSchema = z.object({
     description: z.string(),
     links: z.array(z.string().url()).optional(),
     image: z.object({
-        url: z.string().url().or(z.literal('')),
-        aiHint: z.string(),
+        url: z.string().url().or(z.literal('')).optional(),
+        aiHint: z.string().optional(),
     }).optional(),
 });
 
 export const ProfileSchema = z.object({
-    name: z.string(),
-    title: z.string(),
-    email: z.string().email(),
-    links: LinksSchema,
-    skills: z.array(z.string()),
-    education: z.array(EducationSchema),
-    workExperience: z.array(WorkExperienceSchema),
-    projects: z.array(ProjectSchema),
+    name: z.string().optional(),
+    title: z.string().optional(),
+    email: z.string().email().or(z.literal('')).optional(),
+    links: LinksSchema.optional(),
+    skills: z.array(z.string()).optional(),
+    education: z.array(EducationSchema).optional(),
+    workExperience: z.array(WorkExperienceSchema).optional(),
+    projects: z.array(ProjectSchema).optional(),
 });
