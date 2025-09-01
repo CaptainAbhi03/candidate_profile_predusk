@@ -5,6 +5,7 @@ import WorkExperienceCard from "@/components/work-experience-card";
 import ProjectSearch from "@/components/project-search";
 import { connectToDatabase } from "@/lib/mongodb";
 import type { Profile } from "@/types";
+import { Code2 } from "lucide-react";
 
 async function getProfileData(): Promise<{data: Profile | null; error: string | null}> {
   try {
@@ -49,18 +50,18 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="py-10">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <header className="py-8 bg-card border-b">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary-foreground bg-primary py-2 px-4 rounded-lg inline-block shadow-md">
+          <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">
             Profile Pod
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-2 text-lg text-muted-foreground">
             A dynamic showcase of skills and projects.
-          </p>
+          p>
         </div>
       </header>
-      <main className="container mx-auto p-4 sm:p-6 lg:p-8">
+      <main className="container mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <aside className="lg:col-span-1 space-y-8 sticky top-8">
             <ProfileCard profile={profileData} />
@@ -73,9 +74,12 @@ export default async function Home() {
           </section>
         </div>
       </main>
-      <footer className="text-center p-8 text-muted-foreground text-sm">
-        <p>Built with Next.js, shadcn/ui, and Genkit AI.</p>
-        <p>Deployed on Firebase.</p>
+      <footer className="bg-card text-center p-6 text-muted-foreground text-sm border-t">
+        <div className="flex justify-center items-center gap-2">
+            <Code2 className="w-5 h-5 text-primary"/>
+            <p>Built with Next.js, shadcn/ui, and Genkit AI.</p>
+        </div>
+        <p className="mt-1">Deployed on Firebase.</p>
       </footer>
     </div>
   );

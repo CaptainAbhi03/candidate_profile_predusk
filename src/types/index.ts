@@ -21,6 +21,10 @@ export interface Project {
   title: string;
   description: string;
   links?: string[];
+  image?: {
+      url: string;
+      aiHint: string;
+  }
 }
 
 export interface Profile {

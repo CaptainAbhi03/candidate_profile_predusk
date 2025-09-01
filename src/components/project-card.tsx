@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -10,11 +11,22 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
-  const { title, description, links } = project;
+  const { title, description, links, image } = project;
   const isRankedProject = 'relevanceScore' in project;
 
   return (
-    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full bg-card">
+      {image && (
+          <div className="relative w-full h-48">
+              <Image 
+                  src={image.url}
+                  alt={title}
+                  fill
+                  className="object-cover rounded-t-lg"
+                  data-ai-hint={image.aiHint}
+              />
+          </div>
+      )}
       <CardHeader>
         <CardTitle className="font-headline">{title}</CardTitle>
         {isRankedProject && project.relevanceScore !== undefined && (
