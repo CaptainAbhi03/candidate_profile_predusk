@@ -5,7 +5,8 @@ import WorkExperienceCard from "@/components/work-experience-card";
 import ProjectSearch from "@/components/project-search";
 import { connectToDatabase } from "@/lib/mongodb";
 import type { Profile } from "@/types";
-import { Code2 } from "lucide-react";
+import { Code2, Edit } from "lucide-react";
+import Link from "next/link";
 
 async function getProfileData(): Promise<{data: Profile | null; error: string | null}> {
   try {
@@ -15,7 +16,7 @@ async function getProfileData(): Promise<{data: Profile | null; error: string | 
     const profile = await db.collection('profile').findOne({});
 
     if (!profile) {
-      return { data: null, error: "Profile data not found in the database." };
+      return { data: null, error: "Profile data not found in the database. Please seed it by running 'npm run db:seed'" };
     }
 
     // The _id field from MongoDB is not serializable for Next.js server components by default.
@@ -80,6 +81,11 @@ export default async function Home() {
             <p>Built with Next.js, shadcn/ui, and Genkit AI.</p>
         </div>
         <p className="mt-1">Deployed on Firebase.</p>
+        <div className="mt-4">
+            <Link href="/edit" className="text-xs text-muted-foreground hover:text-primary flex items-center justify-center gap-1">
+                <Edit className="w-3 h-3" /> Edit Profile
+            </Link>
+        </div>
       </footer>
     </div>
   );

@@ -43,25 +43,25 @@ export const profileData: Profile = {
   projects: [
     {
       title: "AI-Driven Business Proposal Generation Tool",
-      description: "Optimized data processing pipelines using Hadoop/Spark for high-throughput ETL workflows, cutting processing time by 75%. Established data governance framework with FAISS-based search, ensuring 99.5% data integrity across data lakes. Developed 8 microservices with FastAPI enabling real-time analytics for investment data processing.",
+      description: "Optimized data processing pipelines using Hadoop and Spark for high-throughput ETL workflows, cutting processing time by 75%. Established a data governance framework with FAISS-based search for 99.5% data integrity. Developed 8 microservices with FastAPI for real-time analytics in investment data processing.",
       links: [],
       image: { url: "https://picsum.photos/600/400", aiHint: "business analytics" }
     },
     {
       title: "Cloud-Native Task Management System",
-      description: "Engineered scalable web application supporting 100+ users with PostgreSQL handling 10GB+ data. Created 25+ RESTful APIs with sub-200ms response times, integrating real-time analytics dashboard. Orchestrated deployment using Docker/Kubernetes on AWS EC2, reducing operational delays by 35%.",
+      description: "Engineered a scalable web application supporting over 100 users with PostgreSQL, handling more than 10GB of data. Created over 25 RESTful APIs with sub-200ms response times and integrated a real-time analytics dashboard. Orchestrated deployment using Docker and Kubernetes on AWS EC2, which reduced operational delays by 35%.",
       links: [],
       image: { url: "https://picsum.photos/600/400", aiHint: "task management" }
     },
     {
       title: "ML-Powered Credit Risk Analytics Engine",
-      description: "Developed ML system processing 50,000+ loan applications for real-time risk assessment. Achieved 93% accuracy and 98% AUC-ROC, outperforming traditional models by 15%. Created Streamlit interface serving 200+ daily users, reducing manual assessment time by 80%.",
+      description: "Developed a machine learning system that processes over 50,000 loan applications for real-time risk assessment. Achieved 93% accuracy and 98% AUC-ROC, outperforming traditional models by 15%. Created a Streamlit interface serving over 200 daily users, reducing manual assessment time by 80%.",
       links: [],
       image: { url: "https://picsum.photos/600/400", aiHint: "credit risk" }
     },
     {
       title: "ML-Based Credit Risk Assessment Framework",
-      description: "Authored research analyzing 75,000+ data points with ensemble models, achieving 94.2% prediction accuracy and 3.5x scalability improvement. To be published in IEEE ICCCNT 2025.",
+      description: "Authored research analyzing over 75,000 data points with ensemble models, achieving 94.2% prediction accuracy and a 3.5x improvement in scalability. This research is to be published in IEEE ICCCNT 2025.",
       links: [],
       image: { url: "https://picsum.photos/600/400", aiHint: "data analysis" }
     }
